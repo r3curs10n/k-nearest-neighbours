@@ -198,7 +198,7 @@ int main(){
 	int queries;
 	cin>>queries;
 	while (queries--){
-		int lbl = answer_query();
+		int lbl = answer_query_parallel();
 		cout<<"label: "<<lbl<<endl;
 	}
 	return 0;
