@@ -1,0 +1,12 @@
+number_of_known_points dimension_of_a_point
+p0x p0y ... p0z label_of_p0
+p1x p1y ... p1z label_of_p1
+.
+.
+pnx pny ... pnz label_of_pn
+number_of_queries
+q0x q0y ... q0z
+q1x q1y ... q1z
+.
+.
+.
