@@ -24,3 +24,6 @@ def dispPoint(p):
 
 def genRandomPoint(lower, upper):
 	return Point(random.uniform(lower, upper),random.uniform(lower, upper),random.randrange(0,C))
+
+def genRandomPtCircle(r,c,l):
+	return Point(random.uniform(0, r),random.uniform(0, 2*3.14),l)

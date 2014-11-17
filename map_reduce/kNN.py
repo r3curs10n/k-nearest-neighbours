@@ -80,9 +80,17 @@ def main():
         ptSet = []
         for y in xrange(0,jobSize):
             p = myutils.genRandomPoint(lowerBnd, upperBnd)
+            #ptSet.append(p)
+            #pts.append(p)
+            # myutils.dispPoint(rand)
+        for y in xrange(0,jobSize/2):
+            p = myutils.genRandomPtCircle(10000, (10,10), 1)
             ptSet.append(p)
             pts.append(p)
-            # myutils.dispPoint(rand)
+        for y in xrange(0,jobSize/2):
+            p = myutils.genRandomPtCircle(10000, (-15000,-15000), 2)
+            ptSet.append(p)
+            pts.append(p)
         ptSet.append(q)
         data.append(ptSet)
 
