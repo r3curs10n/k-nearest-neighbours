@@ -1,6 +1,6 @@
 import sys,math,random
 
-K = 1000			# K nearest neighbours
+K = 4000			# K nearest neighbours
 C = 3			# no. of class labes. Can be at most 6 because we have only 6 colours :P
 N = 10000		# total no. of points
 jobSize = 1000	# no. of points given to each client
@@ -25,5 +25,7 @@ def dispPoint(p):
 def genRandomPoint(lower, upper):
 	return Point(random.uniform(lower, upper),random.uniform(lower, upper),random.randrange(0,C))
 
-def genRandomPtCircle(r,c,l):
-	return Point(random.uniform(0, r),random.uniform(0, 2*3.14),l)
+def genRandomPtCircle(radius,c,l):
+	theta = random.uniform(0, 2*3.14)
+	r = random.uniform(0, radius)
+	return Point(c.x + r*math.cos(theta),c.x + r*math.sin(theta),l)

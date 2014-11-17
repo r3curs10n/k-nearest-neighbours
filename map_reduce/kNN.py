@@ -21,9 +21,6 @@ def mapfn(k,ptSet):
     
     sortedDist = sorted(distList,key=operator.itemgetter(1))
     n=len(sortedDist)
-    # print "Map"
-    # print k
-    # print sortedDist
     yield 0,sortedDist[0:min(n,myutils.K)]
 
 def reducefn(k,vs):
@@ -31,9 +28,6 @@ def reducefn(k,vs):
     returned by each client to get the global k nearest neighbours'''
     import sys, math,operator, heapq
     import myutils
-    # print "Reduce"
-    # print k
-    # print vs
 
     maxHeap = [(p,-d) for (p,d) in vs[0]]
     heapq.heapify(maxHeap)
@@ -46,54 +40,47 @@ def reducefn(k,vs):
 
     return maxHeap
 
-def test():
-    ptSet = []
-    ptSet.append(myutils.Point(1,0,0))
-    ptSet.append(myutils.Point(20,0,0))
-    ptSet.append(myutils.Point(5,0,0))
-    ptSet.append(myutils.Point(2,0,0))
-    ptSet.append(myutils.Point(10,0,0))
-    return ptSet
-
-def test2():
-    ptSet = []
-    ptSet.append(myutils.Point(-1,0,0))
-    ptSet.append(myutils.Point(-2,0,0))
-    ptSet.append(myutils.Point(-3,0,0))
-    ptSet.append(myutils.Point(-4,0,0))
-    return ptSet
-
 def main():
     data=[]
     pts=[]
-    q = myutils.genRandomPoint(lowerBnd, upperBnd)
+    # q = myutils.genRandomPoint(lowerBnd, upperBnd)
+    q = myutils.Point(500,500,0)
     
-    # ptSet = test()
-    # ptSet.append(q)
-    # data.append(ptSet)
+    # ****************
+    # all points randomly generated
+    # ****************
+    # jobs = (N+jobSize-1)/jobSize
+    # for x in xrange(0,jobs):
+    #     ptSet = []
+    #     for y in xrange(0,jobSize):
+    #         p = myutils.genRandomPoint(lowerBnd, upperBnd)
+    #         ptSet.append(p)
+    #         pts.append(p)
+    #         # myutils.dispPoint(rand)
+    #     ptSet.append(q)
+    #     data.append(ptSet)
 
-    # ptSet2 = test2()
-    # ptSet2.append(q)
-    # data.append(ptSet2)
+
+    # ****************
+    # 3 almost circular clusters with random points
+    # ****************
     jobs = (N+jobSize-1)/jobSize
     for x in xrange(0,jobs):
         ptSet = []
-        for y in xrange(0,jobSize):
-            p = myutils.genRandomPoint(lowerBnd, upperBnd)
-            #ptSet.append(p)
-            #pts.append(p)
-            # myutils.dispPoint(rand)
-        for y in xrange(0,jobSize/2):
-            p = myutils.genRandomPtCircle(10000, (10,10), 1)
+        for y in xrange(0,5*jobSize/12):
+            p = myutils.genRandomPtCircle(10000, myutils.Point(10,10,-1), 1)
             ptSet.append(p)
             pts.append(p)
-        for y in xrange(0,jobSize/2):
-            p = myutils.genRandomPtCircle(10000, (-15000,-15000), 2)
+        for y in xrange(0,5*jobSize/12):
+            p = myutils.genRandomPtCircle(10000, myutils.Point(-15000,-15000,-1), 2)
+            ptSet.append(p)
+            pts.append(p)
+        for y in xrange(0,jobSize/6):
+            p = myutils.genRandomPtCircle(1000, myutils.Point(100,100,-1), 0)
             ptSet.append(p)
             pts.append(p)
         ptSet.append(q)
         data.append(ptSet)
-
     datasource = dict(enumerate(data))
     print "Done"
 
